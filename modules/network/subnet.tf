@@ -6,8 +6,9 @@ resource "aws_subnet" "public_subnet_az_a" {
     availability_zone = "eu-west-2a"
 
     tags = {
-        Name        = "public-subnet-az-a"
+        Name        = "${var.env}-public-subnet-az-a"
         Application = "global"
+        Environment = "${var.env}"
     }
 }
 
@@ -18,8 +19,9 @@ resource "aws_subnet" "public_subnet_az_b" {
     availability_zone = "eu-west-2b"
 
     tags = {
-        Name        = "public-subnet-az-b"
+        Name        = "${var.env}-public-subnet-az-b"
         Application = "global"
+        Environment = "${var.env}"
     }
 }
 
@@ -30,8 +32,23 @@ resource "aws_subnet" "public_subnet_az_c" {
     availability_zone = "eu-west-2c"
 
     tags = {
-        Name        = "public-subnet-az-c"
+        Name        = "${var.env}-public-subnet-az-c"
         Application = "global"
+        Environment = "${var.env}"
+    }
+}
+
+# Public NAT subnet
+resource "aws_subnet" "nat_public_subnet" {
+    vpc_id = "${aws_vpc.guestbook_vpc.id}"
+    cidr_block = "${var.network_cidr_subnet_nat_public}"
+    map_public_ip_on_launch = true
+    availability_zone = "eu-west-2a"
+
+    tags = {
+        Name        = "${var.env}-nat-public-subnet"
+        Application = "global"
+        Environment = "${var.env}"
     }
 }
 
@@ -42,8 +59,9 @@ resource "aws_subnet" "private_subnet_az_a" {
     availability_zone = "eu-west-2a"
 
     tags = {
-        Name        = "private-subnet-az-a"
+        Name        = "${var.env}-private-subnet-az-a"
         Application = "global"
+        Environment = "${var.env}"
     }
 }
 
@@ -53,8 +71,9 @@ resource "aws_subnet" "private_subnet_az_b" {
     availability_zone = "eu-west-2b"
 
     tags = {
-        Name        = "private-subnet-az-b"
+        Name        = "${var.env}-private-subnet-az-b"
         Application = "global"
+        Environment = "${var.env}"
     }
 }
 
@@ -64,7 +83,8 @@ resource "aws_subnet" "private_subnet_az_c" {
     availability_zone = "eu-west-2c"
 
     tags = {
-        Name        = "private-subnet-az-c"
+        Name        = "${var.env}-private-subnet-az-c"
         Application = "global"
+        Environment = "${var.env}"
     }
 }

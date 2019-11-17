@@ -1,6 +1,9 @@
+# Environment resources
 variable "env" {
     default = "dev"
 }
+
+# Network resources
 variable "network_cidr_guestbook_vpc" {
     type = "string"
 }
@@ -14,6 +17,10 @@ variable "network_cidr_subnet_az_b_public" {
 
 }
 variable "network_cidr_subnet_az_c_public" {
+    type = "string"
+}
+
+variable "network_cidr_subnet_nat_public" {
     type = "string"
 }
 
