@@ -43,5 +43,14 @@ module "guestbook" {
     private_subnets_ids     = "${module.network.subnet_private_ids}"
     web_instance_type       = "${var.guestbook_web_instance_type}"
     ssh_key_name            = "${var.guestbook_ssh_key_name}"
-    web_instance_user_data  = "${base64encode(var.guestbook_web_instance_user_data)}"
+    web_instance_user_data  = <<-EOT
+        #!/bin/bash 
+        sudo apt update -y 
+        sudo apt-get install git -y
+        cd /home/ubuntu 
+        git clone https://github.com/Kiran-J-Patel/flask_guestbook.git 
+        chown -R ubuntu:ubuntu flask_guestbook
+        cd flask_guestbook/ubuntu_deployment
+        bash deploy.sh
+    EOT
 }

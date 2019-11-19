@@ -40,7 +40,3 @@ variable "guestbook_web_instance_type" {
 variable "guestbook_ssh_key_name" {
     type = "string"
 }
-
-variable "guestbook_web_instance_user_data" {
-    type = "string"
-}

@@ -6,7 +6,7 @@ resource "aws_launch_template" "guestbook_lt" {
     image_id        = "${data.aws_ami.ubuntu.id}"
     instance_type   = "${var.web_instance_type}"
     key_name        = "${var.ssh_key_name}"
-    user_data       = "${var.web_instance_user_data}"
+    user_data       = "${base64encode(var.web_instance_user_data)}"
 
     network_interfaces {
         associate_public_ip_address = false
@@ -58,7 +58,7 @@ data "aws_ami" "ubuntu" {
     most_recent = true
     filter {
         name    = "name"
-        values  = ["ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*"]
+        values  = ["ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*"]
     }
     filter {
         name    = "virtualization-type"
